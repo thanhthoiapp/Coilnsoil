@@ -1,0 +1,5 @@
+﻿@*@model HomeViewModel
+
+@Html.Raw(Model.Footer.Content)*@
+@await Component.InvokeAsync("Footer")
+<a href="#" id="back-to-top" title="Back to top"><i class="fa fa-angle-up"></i></a>

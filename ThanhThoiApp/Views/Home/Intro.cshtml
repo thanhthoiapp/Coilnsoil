@@ -1,0 +1,17 @@
+﻿@model HomeViewModel
+@{
+    Layout = "_Intro";
+    ViewData["Title"] = Model.Title;
+    ViewData["MetaKeyword"] = Model.MetaKeyword;
+    ViewData["MetaDescription"] = Model.MetaDescription;
+}
+<div class="header-inner">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 jtv-logo-block">
+                <!-- Header Logo -->
+                @Html.Raw(Model.IntroFooterId.Content)
+            </div>
+        </div>
+    </div>
+</div>

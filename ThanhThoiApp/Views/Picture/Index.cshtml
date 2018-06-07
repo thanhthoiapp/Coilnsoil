@@ -1,0 +1,61 @@
+﻿@model List<ThanhThoiApp.Application.ViewModels.Picture.PictureViewModel>
+@{
+    ViewData["Title"] = "All Project";
+    ViewData["MetaDescription"] = "All Project";
+}
+<!-- Breadcrumbs -->
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
+                    <li><strong>Project</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<div class="main-container col1-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-main col-sm-12 col-xs-12">
+                <div class="shop-inner">
+                    <div class="page-title">
+                        <h2>All Project </h2>
+                    </div>
+                    
+                    <div class="product-grid-area">
+                        <ul class="products-grid">
+                            @foreach (var item in Model)
+                            {
+                                var url = "/" + item.Category.SeoAlias + "/" + item.SeoAlias + "-p" + item.Id + "/";
+                                <li class="item col-lg-3 col-md-4 col-sm-6 col-xs-6 ">
+                                    <div class="product-item">
+                                        <div class="item-inner">
+                                            <div class="product-thumbnail">
+                                                <div class="pr-img-area">
+                                                    <a title="@item.Name" href="@url">
+                                                        <figure> <img class="first-img" src="@item.Image?w=261" alt="@item.Name"></figure>
+                                                    </a>
+                                                    @item.Name
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Container End -->

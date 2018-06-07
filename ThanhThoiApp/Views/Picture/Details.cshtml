@@ -1,0 +1,105 @@
+﻿@model ThanhThoiApp.Models.PictureViewModels.DetailViewModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+    ViewData["MetaKeyword"] = Model.Product.SeoKeywords;
+    ViewData["MetaDescription"] = Model.Product.SeoDescription;
+    var category = Model.Category;
+    var product = Model.Product;
+}
+<!-- Breadcrumbs -->
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Go to Home Page" href="index.html">Home</a><span>&raquo;</span></li>
+                    <li class=""> <a title="@category.Name" href="/@category.SeoAlias/">@category.Name</a><span>&raquo;</span></li>
+                    <li><strong>@product.Name</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<div class="main-container col1-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-main">
+                <div class="product-view-area">
+                    <div class="product-big-image col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                        
+                        <div class="page-title"><h2>@product.Name</h2></div>
+                        <ul class="previews-list slides" id="slide-picture">
+                            @foreach (var item in Model.ProductImages)
+        {
+                    <li data-src="@item.Name" class="col-xs-12 col-sm-6 col-lg-3 col-md-12"><img src="@item.Name" alt="@item.Picture.Name" /></li>
+}
+                        </ul>
+                        <!-- end: more-images -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Container End -->
+<!-- Related Product Slider -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="related-product-area">
+                <div class="page-header">
+                    <h2>Related Picture</h2>
+                </div>
+                <div class="related-products-pro">
+                    <div class="slider-items-products">
+                        <div id="related-product-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4 fadeInUp">
+                                @foreach (var item in Model.RelatedProducts)
+                                {
+                                    var url = "/" + item.Category.SeoAlias + "/" + item.SeoAlias + "-" + "p" + item.Id + "/";
+                                    <div class="product-item">
+                                        <div class="item-inner">
+                                            <div class="product-thumbnail">
+                                                <div class="pr-img-area">
+                                                    <a title="@item.Name" href="@url">
+                                                        <figure> <img class="first-img" src="@item.Image?w=283" alt="@item.Name"></figure>
+                                                    </a>
+                                                </div>
+                                                @*<div class="pr-info-area">
+                                                    <div class="pr-button">
+                                                        <div class="mt-button add_to_wishlist"> <a href="#"> <i class="fa fa-heart-o"></i> </a> </div>
+                                                        <div class="mt-button quick-view"> <a href="#"> <i class="fa fa-search"></i> </a> </div>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                            <div class="item-info">
+                                                <div class="info-inner">
+                                                    <div class="item-title"> <a title="@item.Name" href="@url">@item.Name</a> </div>
+                                                    @*<div class="item-content">
+                                                        <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                        <div class="pro-action">
+                                                            <button type="button" class="add-to-cart" data-id="@item.Id"><span> Thêm vào giỏ</span> </button>
+                                                        </div>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Related Product Slider End -->

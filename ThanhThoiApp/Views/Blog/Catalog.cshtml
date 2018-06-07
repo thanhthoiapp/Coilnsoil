@@ -1,0 +1,66 @@
+﻿@model ThanhThoiApp.Models.BlogViewModels.BlogCViewModel
+@{
+    ViewData["Title"] = Model.Data.CurrentPage == 1 ? Model.Category.Name : Model.Category.Name + " - Page " + Model.Data.CurrentPage;
+    ViewData["MetaKeyword"] = Model.Data.CurrentPage == 1 ? Model.Category.SeoKeywords : Model.Category.SeoKeywords + " - Page " + Model.Data.CurrentPage;
+    ViewData["MetaDescription"] = Model.Data.CurrentPage == 1 ? Model.Category.SeoDescription : Model.Category.SeoDescription + " - Page " + Model.Data.CurrentPage;
+}
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
+                    <li><strong>@Model.Category.Name</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<section class="blog_post">
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Center colunm-->
+            <div class="col-xs-12 col-sm-12" id="center_column">
+                <div class="center_column">
+                    <div class="page-title">
+                        <h2>@Model.Category.Name</h2>
+                    </div>
+                    <ul class="blog-posts">
+                        @foreach (var item in Model.Data.Results)
+                        {
+                            var url = "/" + item.Category.SeoAlias + "/" + item.SeoAlias + "-" + item.Id + "/";
+                        <li class="post-item">
+                            <article class="entry">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="entry-thumb image-hover2">
+                                            <a href="@url">
+                                                <figure><img src="@item.Image?w=250" alt="@item.Name"></figure>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h3 class="entry-title"><a href="@url">@item.Name</a></h3>
+                                        <div class="entry-meta-data"> <span class="author"> <i class="pe-7s-user"></i>&nbsp; by: <a href="#">Admin</a></span> <span class="cat"> <i class="pe-7s-folder"></i>&nbsp; <a href="#">@item.Category.Name</a> </span> <span class="comment-count"> <i class="pe-7s-comment"></i>&nbsp; @item.ViewCount </span> <span class="date"><i class="pe-7s-date"></i>&nbsp; @item.DateModified</span> </div>
+                                        <a href="@url" class="button read-more">View Detail<i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- ./ Center colunm -->
+            <!-- Right colunm -->
+            <!-- ./right colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</section>
+<!-- Main Container End -->
+<!-- service section -->

@@ -1,0 +1,106 @@
+﻿@model ThanhThoiApp.Models.BlogViewModels.DetailViewModel
+@{
+    ViewData["Title"] = Model.Blog.Name;
+    ViewData["MetaKeyword"] = Model.Blog.SeoKeywords;
+    ViewData["MetaDescription"] = Model.Blog.SeoDescription;
+    var category = Model.Category;
+    var blog = Model.Blog;
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
+                    <li class=""> <a title="@category.Name" href="/@category.SeoAlias/">@category.Name</a><span>&raquo;</span></li>
+                    <li><strong>@blog.Name</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<div class="main-container col1-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-main">
+                <div class="blog-view-area">
+                    <div class="col-xs-12 col-sm-12 col-lg-12 col-md-9 blog-details-area">
+                        <div class="blog-name">
+                            <h1>@blog.Name</h1>
+                        </div>
+
+                        @Html.Raw(blog.Content)
+
+                        @if (Model.Tags.Count > 0)
+        {
+                        <div class="pro-tags">
+                            <div class="pro-tags-title">Tags:</div>
+                            @foreach (var tag in Model.Tags)
+    {
+        var url = "/tag/" + tag.Id;
+                        <a href="@url">@tag.Name</a>
+}
+                        </div>
+
+}
+                        <div class="share-box">
+                            <div class="title">Share in social media</div>
+                            <div class="socials-box"> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-google-plus"></i></a> <a href="#"><i class="fa fa-youtube"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Container End -->
+<!-- Related blog Slider -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="related-blog-area">
+                <div class="page-header">
+                    <h2>Lastest Post</h2>
+                </div>
+                <div class="related-blogs-pro">
+                    <div class="slider-items-blogs">
+                        <div id="related-blog-slider" class="blog-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4 fadeInUp">
+                                @foreach (var item in Model.GetLastest)
+                                {
+                                    var url = "/" + item.Category.SeoAlias + "/" + item.SeoAlias + "-" + item.Id + "/";
+                                    <div class="blog-item col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="item-inner">
+                                            <div class="blog-thumbnail">
+                                                <div class="pr-img-area">
+                                                    <a title="@item.Name" href="@url">
+                                                        <figure> <img class="first-img img-responsive" style="height:170px" src="@item.Image?w=260" alt="@item.Name"> @*<img class="hover-img" src="@item.Image" alt="@item.Name">*@</figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="item-info">
+                                                <div class="info-inner">
+                                                    <div class="item-title"> <a title="@item.Name" href="@url">@item.Name</a> </div>
+                                                    <div class="item-content">
+                                                        <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Related blog Slider End -->

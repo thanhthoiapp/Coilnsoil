@@ -1,0 +1,35 @@
+﻿<div id="modal-detail-view" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Chi tiết thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" id="frmMaintainance">
+                        <input type="hidden" id="hidIdTB" value="" />
+                        <div class="form-group">
+                            <label for="txtNameTB" class="col-sm-2 control-label no-padding-right">Tên thông báo</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly name="txtNameTB" class="form-control" id="txtNameTB">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtTimeTB" class="col-sm-2 control-label no-padding-right">Thời gian đăng</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly name="txtTimeTB" class="form-control" id="txtTimeTB">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtContentTB" class="col-sm-2 control-label no-padding-right">Nội dung</label>
+                            <div class="col-sm-10">
+                                <textarea id="txtContentTB" readonly rows="14" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

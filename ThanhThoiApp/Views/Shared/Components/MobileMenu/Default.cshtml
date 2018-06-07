@@ -1,0 +1,27 @@
+﻿@model List<CategoryViewModel>
+<div id="mobile-menu">
+    <ul>
+        <li>
+            <a href="/" class="home1">Home</a>
+        </li>
+        <li>
+            @foreach (var item in Model.Where(x => x.ParentId == null).OrderBy(x => x.SortOrder))
+        {
+        <li>
+            <a href="/@item.SeoAlias/">@item.Name </a>
+            @if (Model.Any(x => x.ParentId == item.Id))
+        {
+            <ul>
+                @foreach (var subItem in Model.Where(x => x.ParentId == item.Id))
+            {
+                <li><a href="/@subItem.SeoAlias/"><span>@subItem.Name</span></a></li>
+        }
+            </ul>
+    }
+        </li>
+}
+            <li>
+                <a href="/contact/">Contact</a>
+            </li>
+        </ul>
+</div>

@@ -1,0 +1,97 @@
+﻿@using Microsoft.AspNetCore.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <![endif]-->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="@ViewData["MetaDescription"]">
+    <meta name="keywords" content="@ViewData["MetaKeyword"]" />
+    @*<meta property="og:title" content="Example Page">
+        <meta property="og:image" content="http://example.com/images/photo.jpg">
+        <meta property="og:description" content="This is just an example page.">
+        <meta property="og:url" content="http://example.com/page.html">*@
+    <!-- Mobile specific metas  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicons Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/client-side/images/favicon.ico">
+    <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css">
+    <!-- CSS Style -->
+    @*<link href="~/bundled/site-client.min.css" rel="stylesheet" asp-append-version="true" />*@
+    <link href="~/client-side/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/client-side/style.css" asp-append-version="false">
+</head>
+
+<body class="@ViewData["BodyClass"]">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- mobile menu -->
+    @await Component.InvokeAsync("MobileMenu")
+    <!-- end mobile menu -->
+    <div id="page">
+        <!-- Header -->
+        @Html.Partial("_Header.cshtml")
+        <!-- end header -->
+        <nav>
+            <div class="container">
+                <div class="row">
+                    <div class="mm-toggle-wrap">
+                        <div class="mm-toggle"><i class="fa fa-align-justify"></i> </div>
+                        <span class="mm-label">All Menu</span>
+                    </div>
+                    @*<div class="col-md-3 col-sm-3 mega-container hidden-xs">
+                            @await Component.InvokeAsync("CategoryMenu")
+                        </div>*@
+                    <div class="col-md-12 col-sm-12 jtv-megamenu">
+                        @await Component.InvokeAsync("MainMenu")
+                    </div>
+                </div>
+            </div>
+        </nav>
+        @RenderBody()
+        <!-- Footer -->
+        @*@Html.Partial("_Footer.cshtml")*@
+        @await Component.InvokeAsync("Footer")
+        <!-- End Footer -->
+    </div>
+    <!-- JS -->
+    <!-- jquery js -->
+    <script type="text/javascript" src="~/client-side/js/jquery.min.js"></script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="~/client-side/js/bootstrap.min.js"></script>
+    <!-- owl.carousel.min js -->
+    <script type="text/javascript" src="~/client-side/js/owl.carousel.min.js"></script>
+    <!-- jquery.mobile-menu js -->
+    <script type="text/javascript" src="~/client-side/js/mobile-menu.js"></script>
+    <!--jquery-ui.min js -->
+    <script type="text/javascript" src="~/client-side/js/jquery-ui.js"></script>
+    <!-- main js -->
+    <script type="text/javascript" src="~/client-side/js/main.js" asp-append-version="true"></script>
+    <!-- countdown js -->
+    <script type="text/javascript" src="~/client-side/js/countdown.js"></script>
+    <!-- Slider Js -->
+    <script type="text/javascript" src="~/client-side/js/revolution-slider.js"></script>
+    <script src="~/lib/notifyjs/dist/notify.js"></script>
+    <script src="~/lib/notifyjs/dist/styles/metro/notify-metro.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery-all.min.js"></script>
+    <script src="~/lib/mustache/mustache.js"></script>
+    <script src="~/client-app/shared/localize/resources.@(requestCulture.RequestCulture.Culture.Name).js"></script>
+    <script src="~/client-app/shared/tedu.js" asp-append-version="true"></script>
+    <script src="~/client-app/controllers/base/index.js"></script>
+    <script>
+        var baseObj = new BaseController();
+        baseObj.initialize();
+    </script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

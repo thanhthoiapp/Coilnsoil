@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using ThanhThoiApp.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Index";
+}
+@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/category/index.js" asp-append-version="true"></script>
+    <script>
+        var Category = new CategoryController();
+        Category.initialize();
+    </script>
+}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Quản lý danh mục <small>Toàn bộ danh mục</small></h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+             @{
+                    var result = await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Create);
+                }
+                @if (result.Succeeded)
+                {
+                    <button class="btn btn-success" id="btnCreate" type="button">Tạo mới</button>
+                }
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <ul id="treeCategory"></ul>
+                <div id="contextMenu" class="easyui-menu" style="width:120px;">
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Update)).Succeeded)
+    {
+                <div id="btnEdit" data-options="iconCls:'icon-edit'">Sửa</div>
+}
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+    {
+                <div id="btnDelete" data-options="iconCls:'icon-remove'">Xoá</div>
+}
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("_AddEditModal.cshtml")
